@@ -25,7 +25,7 @@ SECRET_KEY = '2eelm%)spog_9hl_5m0n1oa^a%n%jrnt(89#a)72ru0!_2bv6m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cedis-erp-dev.us-east-1.elasticbeanstalk.com','127.0.0.1']
 
 
 # Application definition
@@ -83,30 +83,28 @@ WSGI_APPLICATION = 'campoapp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-"""
-if 'aa1pm66bjvm3v5o.ceeyl6ageols.us-east-2.rds.amazonaws.com' in os.environ:
+if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['ebdb'],
-            'USER': os.environ['alrvivas'],
-            'PASSWORD': os.environ['Cet1s121'],
-            'HOST': os.environ['aa1pm66bjvm3v5o.ceeyl6ageols.us-east-2.rds.amazonaws.com'],
-            'PORT': os.environ['5432'],
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
         }
     }
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'campoapp',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'campoapp',
+            'USER': 'postgres',
+            'PASSWORD': '123456',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
     }
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
