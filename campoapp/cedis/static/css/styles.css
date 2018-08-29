@@ -1,0 +1,52 @@
+html, body{
+	width: 100%;
+	height: 100%;
+}
+.container-fluid{
+}
+.container-fluid .row {
+	min-height: 100% !important;
+}
+.row a,h3 {
+	text-decoration: none !important;
+}.row a,h3:hover {
+	text-decoration: none !important;
+}
+.row .cedis {
+  background: tomato;
+  color: #ffffff;
+  
+  min-height: 280px;
+  text-transform: uppercase;
+}
+.row .cedis h3 {
+	text-align: center;
+  	line-height: 280px;
+  	text-decoration: none !important;
+}
+.row .routes {
+  background: tomato;
+  color: #ffffff;
+  
+  min-height: 280px;
+  text-transform: uppercase;
+}
+.row .routes h3 {
+	text-align: center;
+  	line-height: 280px;
+}
+
+
+
+
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) { ... }
+
+/* Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) { ... }
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) { ... }
+
+/* Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) { ... }

@@ -1,0 +1,63 @@
+{% extends "base.html" %} 
+{% block contedor %}
+<header>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        {% if query %}
+          <h1 >Resultados para: {{ query|escape }}</h1>
+        {% else %}
+          <h1 class="display-4">Ruta: / {{route.name}}</h1>
+         {% endif %} 
+      </div>
+    </div>
+</header>
+<nav class="navbar navbar-light bg-light">
+  <a href=".">Agregar cliente</a>
+  <form class="form-inline">
+    <div class="input-group mb-3">
+      <input type="search" class="form-control" placeholder="Cliente" aria-label="Cliente"  name ="q" value="{{ query|escape }}" aria-describedby="button-addon2">
+      <div class="input-group-append">        
+        <button class="input-group-text btn-outline-primary my-2 my-sm-0" type="submit" id="button-addon2"><i class="material-icons">search</i></button>        
+      </div>
+    </div>     
+  </form>
+</nav>
+<div class="row">
+    
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Celular</th>
+                    <th scope="col">Lista de precios</th>
+                    <th scope="col">Vendedor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if results %}
+                    {% for clients in results  %}
+                        <tr>
+                            <th scope="row"><a href="{{ clients.get_absolute_url}}">{{ clients.name }}</a></th>
+                            <td>{{ clients.cel }} </td>
+                            <td>{{ clients.price_list }} </td>
+                            <td>{{ clients.employee }} </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    {% for clients in clients  %}
+                        <tr>
+                            <th scope="row"><a href="{{ clients.get_absolute_url}}">{{ clients.name }}</a></th>
+                            <td>{{ clients.cel }} </td>
+                            <td>{{ clients.price_list }} </td>
+                            <td>{{ clients.employee }} </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>                
+        </table>
+    </div>
+    
+    
+</div>
+{% endblock %}

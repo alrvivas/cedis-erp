@@ -1,0 +1,20 @@
+{% load static from staticfiles %} 
+<!DOCTYPE html>
+<html lang="es-Mx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">     
+        <title>{% block title %}Campo App | {% if page_title %}{{ page_title }}{% endif %}{% endblock %}</title>
+        {% include "head.html" %}
+        {% block staticos %}{% endblock %} 
+    </head>
+    <body >
+        {% include "menu.html" %}
+        <div class="container-fluid">            
+            {% block contedor %}{% endblock %} 
+        </div>        
+        {% include "scripts.html" %}
+        {% block adicional-scripts %}{% endblock %}
+    </body>
+</html>   

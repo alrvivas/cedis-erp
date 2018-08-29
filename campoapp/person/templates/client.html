@@ -1,0 +1,57 @@
+{% extends "base.html" %} 
+{% block contedor %}
+<header>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        {% if query %}
+          <h1 >Resultados para: {{ query|escape }}</h1>
+        {% else %}
+          <h1 class="display-4">{{client.name}}</h1>
+         {% endif %} 
+      </div>
+    </div>
+</header>
+<nav class="navbar navbar-light bg-light">
+  <a href=".">Generar venta</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Orden" aria-label="Orden" name ="q" value="{{ query|escape }}">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+</nav>
+
+<div class="row">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nota</th>
+                    <th scope="col">Adeudo</th>
+                    <th scope="col">Abono</th>
+                    <th scope="col">Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if results %}
+                    {% for orders in results  %}
+                        <tr>
+                            <th scope="row"><a href=""></a></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    {% for orders in orders  %}
+                        <tr>
+                            <th scope="row"><a href="">{{ clients.name }}</a></th>
+                            <td>{{ clients.cel }} </td>
+                            <td>{{ clients.price_list }} </td>
+                            <td>{{ clients.employee }} </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>                
+        </table>
+    </div>
+</div>
+{% endblock %}

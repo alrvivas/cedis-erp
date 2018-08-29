@@ -1,0 +1,84 @@
+{% extends "base.html" %} 
+{% block contedor %}
+<header>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        {% if query %}
+          <h1 >Resultados para: {{ query|escape }}</h1>
+        {% else %}
+          <h1 class="display-4">Liquidacion</h1>
+         {% endif %} 
+      </div>
+    </div>
+</header>
+<nav class="navbar navbar-light bg-light">
+  <a href=".">regresar</a>
+  <form class="form-inline">
+    <div class="input-group mb-3 ">
+        <input type="date" class="form-control" aria-label="Fecha"  name ="q" value="{{ query|escape }}">
+        <div class="input-group-append">
+            <span class="input-group-text">
+                <i class="material-icons">date_range</i>
+            </span>
+        </div>        
+    </div>
+    
+  </form>
+</nav>
+
+<div class="row">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>                
+                <tr>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Pedido</th>           
+                    <th scope="col">Devolucion</th>
+                    <th scope="col">Ventas<br />Pzs</th>
+                    <th scope="col">Ventas Netas<br />Kg</th>
+                    <th scope="col">Precio<br />Unit</th>
+                    <th scope="col">Importe</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if results %}
+                    {% for orders in results  %}
+                        <tr>
+                            <th scope="row"><a href=""></a></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    {% for orders in orders  %}
+                        <tr>
+                            <th scope="row"><a href=""></a></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>                
+        </table>
+    </div>
+</div>
+{% endblock %}
+{% block adicional-scripts %}
+<script type="text/javascript">
+    /*$('.input-group.date').datepicker({
+
+});*/
+
+</script>
+{% endblock %}

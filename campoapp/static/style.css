@@ -1,0 +1,11 @@
+.container {
+  display: flex; /* or inline-flex */
+  justify-content: space-around ;
+  align-items: center;
+  align-content: center ;
+}
+.item {
+  flex-shrink: 2; /* default 1 */
+  flex-basis: auto;
+
+}

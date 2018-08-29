@@ -1,0 +1,44 @@
+{% extends "base.html" %} 
+{% block contedor %}
+<header>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Cedis {{ cedis.name }}</h1>
+      </div>
+    </div>
+</header>
+<nav class="navbar navbar-light bg-light">
+  <a href=".">Agregar ruta</a>
+  <form class="form-inline">
+    <div class="input-group mb-3">
+      <input type="search" class="form-control" placeholder="Ruta" aria-label="Ruta"  name ="q" value="{{ query|escape }}" aria-describedby="button-addon2">
+      <div class="input-group-append">        
+        <button class="input-group-text btn-outline-primary my-2 my-sm-0" type="submit" id="button-addon2"><i class="material-icons">search</i></button>        
+      </div>
+    </div>     
+  </form>
+</nav>
+<div class="row">
+  {% if results %}
+    {% for routes in results %}
+      <div class="col-3">
+          <a href="{{ routes.get_absolute_url}} "><div class="routes">
+              <h3>
+                  {{ routes.name }} 
+              </h3>   
+          </div></a>               
+      </div>
+    {% endfor %}
+  {% else %}
+    {% for routes in routes  %}
+    <div class="col-3">
+        <a href="{{routes.get_absolute_url}}"><div class="routes">
+            <h3>
+                {{ routes.name }}      
+            </h3>    
+        </div></a>              
+    </div>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}
