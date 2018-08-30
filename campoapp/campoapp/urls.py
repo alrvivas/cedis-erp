@@ -19,27 +19,24 @@ from django.urls import path, re_path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
-from person.views import (
-    LoginView, 
-    LogoutView,
-)
+from person import views
 
 urlpatterns = [
     path('cedis/', include('cedis.urls')),
-    #path('person/', include('person.urls')),
+    path('person/', include('person.urls')),
     path('liquidacion/', include('sale.urls')),
     path('ca/admin/', admin.site.urls),
-    #re_path(r'^/login/$', LoginView.as_view(), name='login'),
-    #re_path(r'^/logout/$', LogoutView.as_view(), name='logout'),
+    re_path(r'^login/$', views.LoginView, name='login'),
+    re_path(r'^logout/$', views.LogoutView, name='logout'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 """if settings.DEBUG == False:
     urlpatterns += [
         path(r'^media/(?P<path>.*)$', 'django.views.static.serve',
              {'document_root': settings.MEDIA_ROOT, }),
     ]"""
-urlpatterns += [
+"""urlpatterns += [
     url(r'^accounts/', include('django.contrib.auth.urls')),
-]
+]"""
 # Change admin site title
 admin.site.site_header = "CAMPOAPP Administration"
 admin.site.site_title = "CAMPOAPP Admin"

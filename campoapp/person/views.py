@@ -19,42 +19,37 @@ from django.http import HttpResponse
 from django.views import View
 
 
-class LoginView(View):
-    template_name = "login.html"
-    template_inactivo = "inactivo.html"
-    template_nousuario = "nousuario.html"
-    page_title = "Iniciar sesión"
-
-    def post(self, request):
-        if not request.user.is_anonymous():
-            return redirect('cedis')
-            if request.POST:
-                formulario = AuthenticationForm(request.POST)
-                if formulario.is_valid:
-                    usuario = request.POST['username']
-                    clave = request.POST['password']
-                    acceso = authenticate(username=usuario, password=clave)
-                    if acceso is not None:
-                        if acceso.is_active:
-                            login(request, acceso)
-                            return redirect('cedis')
-                        else:
-                            # no activo
-                            page_title = "Usuario inactivo"
-                            return render(request,self.template_inactivo,locals())
-                    else:
-                        # no usuario
-                        page_title = "Usuario no registrado"
-                        return render(request,self.template_nousuario,locals())
+def LoginView(request):
+    if not request.user.is_anonymous:
+        return redirect('cedis:cedis')
+    if request.POST:
+        formulario = AuthenticationForm(request.POST)
+        if formulario.is_valid:
+            usuario = request.POST['username']
+            clave = request.POST['password']
+            acceso = authenticate(username=usuario, password=clave)
+            if acceso is not None:
+                if acceso.is_active:
+                    login(request, acceso)
+                    return redirect('cedis:cedis')
+                else:
+                    template_name = 'noactivo.html'
+                    # no activo
+                    return render(request, template_name, locals())
             else:
-                formulario = AuthenticationForm()            
-            return render(request,self.template_name,locals())
+                # no usuario
+                template_name = 'nousuario.html'
+                return render(request, template_name, locals())
+    else:
+        formulario = AuthenticationForm()
+    template_name = 'registration/login.html'
+    return render(request, template_name, locals())
 
 
-class LogoutView(View):
-	def get(sel,request):
-	    logout(request)
-	    return HttpResponseRedirect('/')
+def LogoutView(request):
+    logout(request)
+    return redirect('cedis:cedis')
+
 
 class PersonView(DetailView):
     model = Client

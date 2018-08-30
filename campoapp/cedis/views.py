@@ -24,7 +24,7 @@ class CedisView(View):
     page_title = 'CEDIS'
     template_name = 'cedis.html'
 
-    @method_decorator(login_required(login_url='/accounts/login/'))
+    @method_decorator(login_required(login_url='/login/'))
     def get(self, request):
         cedis = Cedis.objects.all()
         query = self.request.GET.get('q', '')
