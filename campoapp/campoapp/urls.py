@@ -27,11 +27,11 @@ urlpatterns = [
     path('liquidacion/', include('sale.urls')),
     path('ca/admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-if settings.DEBUG == False:
+"""if settings.DEBUG == False:
     urlpatterns += [
         path(r'^media/(?P<path>.*)$', 'django.views.static.serve',
              {'document_root': settings.MEDIA_ROOT, }),
-    ]
+    ]"""
 
 # Change admin site title
 admin.site.site_header = "CAMPOAPP Administration"
