@@ -22,15 +22,16 @@ from django.urls import include
 from django.utils.translation import ugettext_lazy as _
 
 urlpatterns = [
-	path('cedis/', include('cedis.urls')),
+    path('cedis/', include('cedis.urls')),
     path('person/', include('person.urls')),
     path('liquidacion/', include('sale.urls')),
-	path('ca/admin/', admin.site.urls),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('ca/admin/', admin.site.urls),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG == False:
     urlpatterns += patterns('',
-        path(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, }),
-   )
+                            path(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+                                 {'document_root': settings.MEDIA_ROOT, }),
+                            )
 
 # Change admin site title
 admin.site.site_header = "CAMPOAPP Administration"
