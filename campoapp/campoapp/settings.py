@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2eelm%)spog_9hl_5m0n1oa^a%n%jrnt(89#a)72ru0!_2bv6m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['cedis-erp-dev.us-east-1.elasticbeanstalk.com','127.0.0.1']
 
