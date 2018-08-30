@@ -14,12 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls import url, include
+from django.conf.urls import include
 from django.urls import path
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include
-from django.utils.translation import ugettext_lazy as _
 
 urlpatterns = [
     path('cedis/', include('cedis.urls')),
@@ -28,10 +26,10 @@ urlpatterns = [
     path('ca/admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG == False:
-    urlpatterns += patterns('',
-                            path(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-                                 {'document_root': settings.MEDIA_ROOT, }),
-                            )
+    urlpatterns += [
+        path(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+             {'document_root': settings.MEDIA_ROOT, }),
+    ]
 
 # Change admin site title
 admin.site.site_header = "CAMPOAPP Administration"
