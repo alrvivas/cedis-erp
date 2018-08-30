@@ -7,22 +7,23 @@ from import_export.fields import Field
 from import_export.admin import ImportExportModelAdmin
 from import_export.widgets import ForeignKeyWidget
 from django.forms.models import BaseInlineFormSet
-from .models import Employee,Client
+from .models import Employee, Client
 from address.models import Address
 
 
 class ClientResource(resources.ModelResource):
 
     address = Field(column_name='name', attribute='Address',
-                           widget=ForeignKeyWidget(Address, 'name'))
+                    widget=ForeignKeyWidget(Address, 'name'))
 
     class Meta:
         model = Client
         skip_unchanged = True
         report_skipped = True
-        import_id_fields = ['id',]
+        import_id_fields = ['id', ]
         exclude = ('id',)
-        fields = ('name','manager','rfc','call_visit','billing_condition','route','employee','tel_1','tel_2','cel','email',)
+        fields = ('name', 'manager', 'rfc', 'call_visit', 'billing_condition',
+                  'route', 'employee', 'tel_1', 'tel_2', 'cel', 'email',)
 
     def get_instance(self, instance_loader, row):
         try:
@@ -34,32 +35,35 @@ class ClientResource(resources.ModelResource):
         except Exception:
             return None
 
-class ClientAdressInline(admin.StackedInline ):
+
+class ClientAdressInline(admin.StackedInline):
     model = Address
-    fields = ['name',('street','zip_code'),'location']
-    autocomplete_fields = ['location',]
+    fields = ['name', ('street', 'zip_code'), 'location']
+    autocomplete_fields = ['location', ]
     extra = 1
+
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('name','cedis',)
-    
-    prepopulated_fields = {'slug' : ('name',)}
+    list_display = ('name', 'cedis',)
+
+    prepopulated_fields = {'slug': ('name',)}
+
 
 @admin.register(Client)
 class ClientAdmin(ImportExportModelAdmin):
-    list_display = ('name','slug','employee','price_list','route')
+    list_display = ('name', 'slug', 'employee', 'price_list', 'route')
     #list_editable = ('employee',)
     resource_class = ClientResource
-    list_filter = ('route__cedis','price_list','route')    
-    fields = ['name','slug',('manager','rfc'),('call_visit','billing_condition'),('employee','price_list','route'),('tel_1','tel_2'),('cel','email')]
+    list_filter = ('route__cedis', 'price_list', 'route')
+    fields = ['name', 'slug', ('manager', 'rfc'), ('call_visit', 'billing_condition'), (
+        'employee', 'price_list', 'route'), ('tel_1', 'tel_2'), ('cel', 'email')]
 
     inlines = [ClientAdressInline]
-    
+
     def get_cedis(self, obj):
         return obj.employee.cedis
     get_cedis.short_description = 'Cedis'
     get_cedis.admin_order_field = 'employee__cedis'
 
-    prepopulated_fields = {'slug' : ('name',)}
-
+    prepopulated_fields = {'slug': ('name',)}
