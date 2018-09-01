@@ -31,10 +31,12 @@ class MunicipalityResource(resources.ModelResource):
         model = Municipality
         skip_unchanged = True
         report_skipped = True
-        import_id_fields = ['id', ]
-        exclude = ('id',)
-        fields = ('state', 'name',)
+        import_id_fields = ['id','state']
+        #exclude = ('id',)
+        fields = ('id','name', 'state',)
 
+
+"""
     def get_instance(self, instance_loader, row):
         try:
             params = {}
@@ -44,6 +46,7 @@ class MunicipalityResource(resources.ModelResource):
             return self.get_queryset().get(**params)
         except Exception:
             return None
+"""            
 
 class LocationResource(resources.ModelResource):
 
@@ -51,9 +54,9 @@ class LocationResource(resources.ModelResource):
         model = Location
         skip_unchanged = True
         report_skipped = True
-        import_id_fields = ['id', ]
+        import_id_fields = ['id','municipality' ]
         exclude = ('id',)
-        fields = ('municipality', 'name',)
+        fields = ('name','municipality')
 
     def get_instance(self, instance_loader, row):
         try:
@@ -87,4 +90,4 @@ class LocationAdmin(ImportExportModelAdmin):
     search_fields = ['name', 'municipality__name']
     resource_class = LocationResource
 
-    ordering = ['municipality', 'name']
+    ordering = ['municipality', 'id']

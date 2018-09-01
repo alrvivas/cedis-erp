@@ -36,9 +36,9 @@ class ClientResource(resources.ModelResource):
             return None
 
 
-class ClientAdressInline(admin.StackedInline):
+class ClientAdressInline(admin.TabularInline):
     model = Address
-    fields = ['name', ('street', 'zip_code'), 'location']
+    fields = ['name', ('street', 'zip_code',) , 'location']
     autocomplete_fields = ['location', ]
     extra = 1
 
@@ -51,19 +51,24 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 
 @admin.register(Client)
-class ClientAdmin(ImportExportModelAdmin):
-    list_display = ('name', 'slug', 'employee', 'price_list', 'route')
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ('name', 'route')
+    
     #list_editable = ('employee',)
     resource_class = ClientResource
     list_filter = ('route__cedis', 'price_list', 'route')
-    fields = ['name', 'slug', ('manager', 'rfc'), ('call_visit', 'billing_condition'), (
-        'employee', 'price_list', 'route'), ('tel_1', 'tel_2'), ('cel', 'email')]
-
+    fields = ('name', 'slug','manager', 'rfc', 'call_visit', 'employee', 'route', 'price_list', 'billing_condition', 'tel_1', 'tel_2', 'cel', 'email')
+    """fieldsets = (
+        ('Grupo',
+            {
+                'fields' : ( tuple(['manager', 'rfc']), ('call_visit', 'employee', 'route',), ('price_list', 'billing_condition', ), ('tel_1', 'tel_2'), ('cel', 'email'))
+            }
+        ),
+    )"""
     inlines = [ClientAdressInline]
+    prepopulated_fields = {'slug': ('name',)}
 
     def get_cedis(self, obj):
         return obj.employee.cedis
     get_cedis.short_description = 'Cedis'
     get_cedis.admin_order_field = 'employee__cedis'
-
-    prepopulated_fields = {'slug': ('name',)}
