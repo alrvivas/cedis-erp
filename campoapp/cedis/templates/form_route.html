@@ -12,23 +12,18 @@
 	<div class="col-6">
 		<form method="post">		    
 		    {% csrf_token %}
-		    {{ form.as_p }}
 		    <div class="form-group">
-	    	 	<label for="id_cedis">CEDIS</label>
-			    <select class="form-control" name="cedis" id="id_cedis">
-			      	<option value="" selected="">Seleccione uno</option>
-			      	{% for cedis in cedis %}
-			     		<option value="{{cedis.id}}">{{cedis.name}}</option>
-			      	{% endfor %}
-			    </select>
-		    </div>	    	
+		    	<label for="id_cedis_name">CEDIS:</label>
+				<input type="text" class="form-control" name="cedis_name" maxlength="140" required="" id="id_cedis_name" value="{{cedis.name}}" readonly="readonly">
+				<input type="hidden" class="form-control" name="cedis" maxlength="140" required="" id="id_cedis" value="{{cedis.id}}">
+		    </div>		        	
 		    <div class="form-group">
 		    	<label for="id_name">Nombre:</label>
 				<input type="text" class="form-control" name="name" maxlength="140" required="" id="id_name">
 		    </div>
 		    <div class="form-group">
 		    	<label for="id_slug">Slug:</label>
-		    	<input type="text" class="form-control" name="slug" maxlength="50" id="id_slug" disabled>		    		
+		    	<input type="text" class="form-control" name="slug" maxlength="50" id="id_slug" readonly="readonly">		    		
 		    </div>
 		    <div class="form-group">
 		    	<div class="btn-group-toggle" data-toggle="buttons">
@@ -46,19 +41,17 @@
 
 {% block adicional-scripts %}
 <script type="text/javascript">
-	$("#id_name").keyup(function(){
-	    var Text = $(this).val();
-	    convertToSlug(Text);
-	    $("#id_slug").val(Text);    
-	});
+var slug = function(str) {
+    var $slug = '';
+    var trimmed = $.trim(str);
+    $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
+    replace(/-+/g, '-').
+    replace(/^-|-$/g, '');
+    return $slug.toLowerCase();
+}
 
-	function convertToSlug(Text)
-	{
-	    return Text
-	        .toLowerCase()
-	        .replace(/ /g,'-')
-	        .replace(/[^\w-]+/g,'')
-	        ;
-	}
+$("#id_name").keyup(function(){
+	$('#id_slug').val(slug($('#id_name').val()));
+});
 </script>
 {% endblock %}

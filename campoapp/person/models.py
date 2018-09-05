@@ -26,6 +26,9 @@ class Employee(AbstractModel):
     def __str__(self):
         return self.name
 
+    def add_employee_url(self):
+        return reverse('person:new_employee', kwargs={'slug': self.slug})
+
 
 class Client(models.Model):
     BILLING_CONDITIONS = (
@@ -57,3 +60,6 @@ class Client(models.Model):
 
     def get_absolute_url(self):
         return reverse('person:person_detail', args=[str(self.slug)])
+
+    def add_client_url(self):
+        return reverse('person:new_client', kwargs={'slug': self.slug})

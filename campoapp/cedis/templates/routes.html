@@ -8,7 +8,8 @@
     </div>
 </header>
 <nav class="navbar navbar-light bg-light">
-  <a href=".">Agregar ruta</a>
+  <a href="{% url "cedis:new_route" slug=slug %}">Agregar ruta</a>
+  <a href="{% url "person:new_employee" slug=slug %}">Agregar vendedor</a>
   <form class="form-inline">
     <div class="input-group mb-3">
       <input type="search" class="form-control" placeholder="Ruta" aria-label="Ruta"  name ="q" value="{{ query|escape }}" aria-describedby="button-addon2">

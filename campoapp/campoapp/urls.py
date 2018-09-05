@@ -22,6 +22,7 @@ from django.urls import include
 from person import views
 
 urlpatterns = [
+    path('address/', include('address.urls')),
     path('cedis/', include('cedis.urls')),
     path('person/', include('person.urls')),
     path('liquidacion/', include('sale.urls')),

@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
@@ -12,11 +13,11 @@ from django.views import View
 from django.db.models import Q
 from .models import Cedis, Route
 from person.models import Client
+from .forms import routeForm
 
 
 from django.http import HttpResponse
 from django.views import View
-
 
 
 class CedisView(View):
@@ -68,20 +69,40 @@ class RouteCedis(DetailView):
             results = []
         return render(request, self.template_name, locals())
 
-    #cedis = Cedis.objects.all()
+    # cedis = Cedis.objects.all()
 
     """def get_queryset(self):
-		self.cedis = get_object_or_404(Cedis, slug=self.kwargs['slug'])
-		return Route.objects.filter(cedis=self.cedis)"""
+        self.cedis = get_object_or_404(Cedis, slug=self.kwargs['slug'])
+        return Route.objects.filter(cedis=self.cedis)"""
 
 
-class RouteCreation(CreateView, View):
-    model = Route
+class RouteCreation(View):
+    model = Cedis
+    form_class = routeForm
+    initial = {'key': 'value'}
     page_title = 'Agregar ruta'
     template_name = 'form_route.html'
-    success_url = reverse_lazy('cedis:cedis_detail')
-    fields = ('__all__')
 
+    def get(self, request, slug):
+        self.cedis = get_object_or_404(Cedis, slug=self.kwargs['slug'])
+        cedis = self.cedis
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, locals())
+
+    def post(self, request,slug):
+        self.cedis = get_object_or_404(Cedis, slug=self.kwargs['slug'])
+        cedis = self.cedis
+        form = self.form_class(request.POST)
+        route = Route.objects.all()
+        if form.is_valid():
+            route = form.save(commit=False)
+            route.save()
+            return redirect(cedis.get_absolute_url())
+        else:
+            form = self.routeForm() 
+        args = {}
+        #args.update(request)
+        return render(request, self.template_name, locals())
 
 class ClientRoute(DetailView):
     model = Route

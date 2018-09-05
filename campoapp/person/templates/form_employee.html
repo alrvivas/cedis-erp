@@ -3,15 +3,20 @@
 <header>
 	<div class="jumbotron jumbotron-fluid">
 	  <div class="container">
-	    <h1 class="display-4">Agregar CEDIS</h1>
+	    <h1 class="display-4">{{ page_title }}</h1>
 	  </div>
 	</div>
 </header>
 <div class="row align-items-center">
 	<div class="col"></div>
 	<div class="col-6">
-		<form method="post">
-		    {% csrf_token %}	    	
+		<form method="post">		    
+		    {% csrf_token %}
+		    <div class="form-group">
+		    	<label for="id_cedis_name">CEDIS:</label>
+				<input type="text" class="form-control" name="cedis_name" maxlength="140" required="" id="id_cedis_name" value="{{cedis.name}}" readonly="readonly">
+				<input type="hidden" class="form-control" name="cedis" maxlength="140" required="" id="id_cedis" value="{{cedis.id}}">
+		    </div>		        	
 		    <div class="form-group">
 		    	<label for="id_name">Nombre:</label>
 				<input type="text" class="form-control" name="name" maxlength="140" required="" id="id_name">

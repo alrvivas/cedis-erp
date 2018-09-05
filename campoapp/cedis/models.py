@@ -26,7 +26,7 @@ class Cedis(AbstractModel):
         return reverse('cedis:cedis_detail', args=[str(self.slug)])
 
     def add_route_url(self):
-        return ('cedis:new_route', (), {'slug': self.slug})
+        return reverse('cedis:new_route', kwargs={'slug': self.slug})
 
 
 class Route(AbstractModel):
@@ -35,6 +35,7 @@ class Route(AbstractModel):
                             blank=True, verbose_name=('Slug'))
     cedis = models.ForeignKey(
         Cedis, on_delete=models.CASCADE, null=True, blank=True)
+    
 
     def __str__(self):
         return self.name

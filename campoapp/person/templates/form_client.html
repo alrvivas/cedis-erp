@@ -1,0 +1,186 @@
+{% extends "base.html" %} 
+{% block contedor %}
+<header>
+	<div class="jumbotron jumbotron-fluid">
+	  <div class="container">
+	    <h1 class="display-4">{{ page_title }}</h1>
+	  </div>
+	</div>
+</header>
+<div class="row align-items-center">
+	<div class="col"></div>
+	<div class="col-8">
+		<form method="post">		    
+		    {% csrf_token %}
+		    <div class="form-group">
+		    	<label for="id_route_name">Ruta:</label>
+				<input type="text" class="form-control" name="route_name" maxlength="140" required="" id="id_route_name" value="{{route.name}}" readonly="readonly">
+				<input type="hidden" class="form-control" name="route" maxlength="140" required="" id="id_route" value="{{route.id}}">
+		    </div>
+		    <div class="form-row">		        	
+			    <div class="form-group col-6">
+			    	<label for="id_name">Nombre:</label>
+					<input type="text" class="form-control" name="name" maxlength="140" required="" id="id_name">
+			    </div>
+			    <div class="form-group col">
+			    	<label for="id_rfc">R.F.C:</label>
+					<input type="text" class="form-control" name="rfc" maxlength="140" id="id_rfc">
+			    </div>
+			    <div class="form-group col">
+			    	<label for="id_manager">Encargado:</label>
+			    	<input type="text" class="form-control" name="manager" maxlength="50" id="id_manager"> 		
+			    </div>
+			</div>
+		    <div class="form-group">
+		    	<label for="id_slug">Slug:</label>
+		    	<input type="text" class="form-control" name="slug" maxlength="50" id="id_slug" readonly="readonly">		    		
+		    </div>		    
+		    <div class="form-row">
+			    <div class="form-group col">
+			    	<label for="id_tel_1">Telefono 1:</label>
+					<input type="tel" class="form-control" name="tel_1" maxlength="20" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required="" id="id_tel_1">
+			    </div>
+			    <div class="form-group col">
+			    	<label for="id_tel_2">Telefono 2:</label>
+					<input type="tel" class="form-control" name="tel_2" maxlength="140" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="id_tel_2">
+			    </div>
+			    <div class="form-group col">
+			    	<label for="id_cel">Celular:</label>
+					<input type="tel" class="form-control" name="cel" maxlength="140" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="id_cel">
+			    </div>
+			</div>
+			<div class="form-group">
+		    	<label for="id_email">Correo eléctronico:</label>
+		    	<input type="email" class="form-control" name="email" maxlength="140" required="" id="id_email"> 		
+		    </div>		    
+		    <div class="form-row">
+			    <div class="form-group col">
+			    	<label for="id_call_visit">Frecuecia de llamada/visita:</label>
+					<input type="text" class="form-control" name="call_visit" maxlength="50" id="id_call_visit">
+			    </div>
+			    <div class="form-group col">
+			    	<label for="id_employee">Vendedor asignado:</label>
+			    	<select class="form-control" name="employee" id="id_employee">
+			    		<option  value="" selected>Seleccione uno</option>   		
+			      		{% for e in employee %}
+			      			<option value="{{e.id}}">{{e.name}}</option>			      			
+			      		{% endfor %}			      
+			    	</select>
+			    </div>
+			    <div class="form-group col">
+			    	<label for="id_price_list">Lista de precios:</label>
+			    	<select class="form-control" name="price_list" id="id_price_list">
+			    		<option  value="" selected>Seleccione una</option>   		
+			      		{% for lp in price_list %}
+			      			<option value="{{lp.id}}">{{lp.name}}</option>			      			
+			      		{% endfor %}			      
+			    	</select>
+			    </div>
+			    <div class="form-group col">
+			    	<label for="id_billing_condition">Condicones de pago:</label>
+			    	<select class="form-control" name="billing_condition" id="id_billing_condition">   		
+			      		{% for x,y in form.fields.billing_condition.choices %}
+			      			<option value="{{x}}" {% if form.fields.billing_condition.value == x %} selected {% endif %}>{{y}}</option>
+			      		{% endfor %}			      
+			    	</select>
+			  	</div>
+			</div>
+		    <div class="form-group">
+		    	<div class="btn-group-toggle" data-toggle="buttons">
+		    		<label for="id_isActive" class="btn btn-outline-primary active">
+		    			<input type="checkbox" name="isActive" id="id_isActive" autocomplete="off" checked="">Activo
+		    		</label>			    		
+		    	</div>
+		    </div>
+		    <h3>Dirección</h3>
+		    {{ address_formset.management_form }}
+		    {% for form in address_formset %}
+		    {{ form.id }}
+		    <div class="form-group">
+		    	<label for="id_name">Nombre:</label>
+		    	<input type="text" class="form-control" name="address_set-0-name" maxlength="50" id="id_name">		    		
+		    </div>
+		    <div class="form-row">
+			    <div class="form-group col-5">
+			    	<label for="id_street">Calle:</label>
+					<input type="text" class="form-control" name="address_set-0-street" maxlength="50" id="id_street">
+			    </div>
+			    <div class="form-group col-2">
+			    	<label for="id_zip_code">C.P.:</label>
+					<input type="text" class="form-control" name="address_set-0-zip_code" maxlength="50" id="id_zip_code">
+			    </div>
+			    <div class="form-group col ui-widget">
+			    	<label for="id_location_name">Localidad:</label>
+			    	<input type="text" class="form-control" name="location_name" maxlength="50" id="id_location_name">
+			    	<input type="hidden" class="form-control" name="address_set-0-location" maxlength="50" id="id_location" value="">
+			    </div>
+			</div>
+			{% endfor %}	    	
+	    	<input type="submit" class="btn btn-outline-primary btn-lg btn-block" value="Agregar">
+		</form>		  
+	</div>
+	<div class="col"></div>
+</div>
+{% endblock %}
+
+{% block adicional-scripts %}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+	var slug = function(str) {
+	    var $slug = '';
+	    var trimmed = $.trim(str);
+	    $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
+	    replace(/-+/g, '-').
+	    replace(/^-|-$/g, '');
+	    return $slug.toLowerCase();
+	}
+
+	$("#id_name").keyup(function(){
+		$('#id_slug').val(slug($('#id_name').val()));
+	});
+</script>
+<script type="text/javascript">
+	$(function() {
+		$.widget("ui.autocomplete", $.ui.autocomplete, {
+
+		  _renderMenu: function(ul, items) {
+		    var that = this;
+		    ul.attr("class", "nav nav-pills nav-stacked  bs-autocomplete-menu");
+		    $.each(items, function(index, item) {
+		      that._renderItemData(ul, item);
+		    });
+		  },
+
+		  _resizeMenu: function() {
+		    var ul = this.menu.element;
+		    ul.outerWidth(Math.min(
+		      // Firefox wraps long text (possibly a rounding bug)
+		      // so we add 1px to avoid the wrapping (#7513)
+		      ul.width("").outerWidth() + 1,
+		      this.element.outerWidth()
+		    ));
+		  }
+
+		});
+	});	
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#id_location_name").autocomplete({
+		minLength: 2,
+        source:'{% url "address:autocomplate_location" %}',        
+        focus: function( event, ui ) {
+        	$("#id_location_name").val(ui.item.label);
+        	return false;
+        },
+        select: function( event, ui ) {
+            $("#id_location_name").val(ui.item.label);
+            $("#id_location").val(ui.item.value);
+            return false;
+        }
+    });
+});	
+</script>
+
+{% endblock %}

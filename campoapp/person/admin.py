@@ -57,14 +57,7 @@ class ClientAdmin(admin.ModelAdmin):
     #list_editable = ('employee',)
     resource_class = ClientResource
     list_filter = ('route__cedis', 'price_list', 'route')
-    fields = ('name', 'slug','manager', 'rfc', 'call_visit', 'employee', 'route', 'price_list', 'billing_condition', 'tel_1', 'tel_2', 'cel', 'email')
-    """fieldsets = (
-        ('Grupo',
-            {
-                'fields' : ( tuple(['manager', 'rfc']), ('call_visit', 'employee', 'route',), ('price_list', 'billing_condition', ), ('tel_1', 'tel_2'), ('cel', 'email'))
-            }
-        ),
-    )"""
+    fields = ('name', 'slug','manager', 'rfc', 'call_visit', 'employee', 'route', 'price_list', 'billing_condition', 'tel_1', 'tel_2', 'cel', 'email')    
     inlines = [ClientAdressInline]
     prepopulated_fields = {'slug': ('name',)}
 

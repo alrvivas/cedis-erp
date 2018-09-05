@@ -12,7 +12,7 @@
     </div>
 </header>
 <nav class="navbar navbar-light bg-light">
-  <a href=".">Agregar cliente</a>
+  <a href="{% url "person:new_client" slug=slug %}">Agregar cliente</a>
   <form class="form-inline">
     <div class="input-group mb-3">
       <input type="search" class="form-control" placeholder="Cliente" aria-label="Cliente"  name ="q" value="{{ query|escape }}" aria-describedby="button-addon2">
@@ -29,6 +29,7 @@
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Telefono</th>
                     <th scope="col">Celular</th>
                     <th scope="col">Lista de precios</th>
                     <th scope="col">Vendedor</th>
@@ -38,7 +39,8 @@
                 {% if results %}
                     {% for clients in results  %}
                         <tr>
-                            <th scope="row"><a href="{{ clients.get_absolute_url}}">{{ clients.name }}</a></th>
+                            <th scope="row"><a href="{{ clients.get_absolute_url}}">{{ clients.name }}</a></th>                            
+                            <td>{{ clients.tel_1 }} </td>
                             <td>{{ clients.cel }} </td>
                             <td>{{ clients.price_list }} </td>
                             <td>{{ clients.employee }} </td>
@@ -48,7 +50,8 @@
                     {% for clients in clients  %}
                         <tr>
                             <th scope="row"><a href="{{ clients.get_absolute_url}}">{{ clients.name }}</a></th>
-                            <td>{{ clients.cel }} </td>
+                            <td>{{ clients.tel_1 }} </td>
+                            <td>{{ clients.cel }} </td>                            
                             <td>{{ clients.price_list }} </td>
                             <td>{{ clients.employee }} </td>
                         </tr>
