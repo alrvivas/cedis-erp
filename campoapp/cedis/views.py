@@ -19,6 +19,14 @@ from .forms import routeForm
 from django.http import HttpResponse
 from django.views import View
 
+class IndexView(View):    
+    template_name = 'index.html'
+
+    @method_decorator(login_required(login_url='/login/'))
+    def get(self, request):
+        page_title = 'CaVe Logistics'
+        return render(request, self.template_name, locals())
+
 
 class CedisView(View):
     model = Cedis

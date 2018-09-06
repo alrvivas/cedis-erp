@@ -20,8 +20,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
 from person import views
+from cedis.views import (
+    IndexView,
+)
 
 urlpatterns = [
+    re_path(r'^$', IndexView.as_view(), name='index'),
     path('address/', include('address.urls')),
     path('cedis/', include('cedis.urls')),
     path('person/', include('person.urls')),

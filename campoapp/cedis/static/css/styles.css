@@ -14,15 +14,14 @@ html, body{
 }
 .row .cedis {
   background: tomato;
-  color: #ffffff;
-  
+  color: #ffffff;  
   min-height: 280px;
   text-transform: uppercase;
 }
 .row .cedis h3 {
 	text-align: center;
-  	line-height: 280px;
-  	text-decoration: none !important;
+	line-height: 280px;
+	text-decoration: none !important;
 }
 .row .routes {
   background: tomato;
@@ -34,6 +33,11 @@ html, body{
 .row .routes h3 {
 	text-align: center;
 	line-height: 280px;
+}
+i.material-icons {
+    font-size: 128px;
+    line-height: 0;
+    vertical-align: middle;
 }
 .ui-helper-hidden-accessible {
   border: 0;

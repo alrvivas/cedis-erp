@@ -1,0 +1,26 @@
+{% extends "base.html" %} 
+{% block contedor %}
+<header>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">        
+        <h1 class="display-4">{{ page_title }}</h1>         
+      </div>
+    </div>
+</header>
+<div class="row">   
+  <div class="col-3" data-toggle="tooltip" data-placement="top" title="CEDIS">
+    <a href="{% url 'cedis:cedis' %} " >
+      <div class="cedis" data-toggle="tooltip" data-placement="top" title="CEDIS">          
+            <span><i class="material-icons">store</i></span>            
+      </div>
+    </a>               
+  </div>
+</div>
+{% endblock %}
+{% block adicional-scripts %}
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }); 
+</script>
+{% endblock %}
