@@ -38,7 +38,7 @@ class ClientResource(resources.ModelResource):
 
 class ClientAdressInline(admin.TabularInline):
     model = Address
-    fields = ['name', ('street', 'zip_code',) , 'location']
+    fields = ['name', ('street', 'zip_code',) , 'location','lat','lon']
     autocomplete_fields = ['location', ]
     extra = 1
 
