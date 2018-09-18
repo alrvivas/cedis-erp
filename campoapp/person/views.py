@@ -23,7 +23,7 @@ from cedis.models import Cedis
 
 def LoginView(request):
     if not request.user.is_anonymous:
-        return redirect('cedis:cedis')
+        return redirect('index')
     if request.POST:
         formulario = AuthenticationForm(request.POST)
         if formulario.is_valid:
@@ -33,7 +33,7 @@ def LoginView(request):
             if acceso is not None:
                 if acceso.is_active:
                     login(request, acceso)
-                    return redirect('cedis:cedis')
+                    return redirect('index')
                 else:
                     template_name = 'noactivo.html'
                     # no activo
@@ -50,7 +50,7 @@ def LoginView(request):
 
 def LogoutView(request):
     logout(request)
-    return redirect('cedis:cedis')
+    return redirect('index')
 
 
 class PersonView(DetailView):

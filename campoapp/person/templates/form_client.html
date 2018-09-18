@@ -51,7 +51,7 @@
 			</div>
 			<div class="form-group">
 		    	<label for="id_email">Correo eléctronico:</label>
-		    	<input type="email" class="form-control" name="email" maxlength="140" required="" id="id_email"> 		
+		    	<input type="email" class="form-control" name="email" maxlength="140" placeholder="ejemplo@ejemplo.com" id="id_email"> 		
 		    </div>		    
 		    <div class="form-row">
 			    <div class="form-group col">
@@ -96,23 +96,34 @@
 		    {{ address_formset.management_form }}
 		    {% for form in address_formset %}
 		    {{ form.id }}
-		    <div class="form-group">
-		    	<label for="id_name">Nombre:</label>
-		    	<input type="text" class="form-control" name="address_set-0-name" maxlength="50" id="id_name">		    		
-		    </div>
-		    <div class="form-row">
-			    <div class="form-group col-5">
+		    <div class="form-row ">
+		    	<div class="form-group col-6">
+		    		<label for="id_name">Nombre:</label>
+		    		<input type="text" class="form-control" name="address_set-0-name" maxlength="50" placeholder="Dirección principal" id="id_name">		    		
+		    	</div>
+		    	<div class="form-group col-6">
 			    	<label for="id_street">Calle:</label>
-					<input type="text" class="form-control" name="address_set-0-street" maxlength="50" id="id_street">
+					<input type="text" class="form-control" name="address_set-0-street" maxlength="50" placeholder="Sor Juna Ines de la Cruz, #266" id="id_street">
 			    </div>
+		    </div>
+		    
+		    <div class="form-row">			    
 			    <div class="form-group col-2">
 			    	<label for="id_zip_code">C.P.:</label>
-					<input type="text" class="form-control" name="address_set-0-zip_code" maxlength="50" id="id_zip_code">
+					<input type="text" class="form-control" name="address_set-0-zip_code" maxlength="50" placeholder="59000" pattern="[0-9]{5}" id="id_zip_code">
 			    </div>
 			    <div class="form-group col ui-widget">
 			    	<label for="id_location_name">Localidad:</label>
 			    	<input type="text" class="form-control" name="location_name" maxlength="50" id="id_location_name">
 			    	<input type="hidden" class="form-control" name="address_set-0-location" maxlength="50" id="id_location" value="">
+			    </div>
+			    <div class="form-group col-2">
+			    	<label for="id_lat">Latitud:</label>
+					<input type="text" class="form-control" name="address_set-0-lat" maxlength="50" id="id_zip_code">
+			    </div>
+			    <div class="form-group col-2">
+			    	<label for="id_lon">Longuitud:</label>
+					<input type="text" class="form-control" name="address_set-0-lon" maxlength="50" id="id_zip_code">
 			    </div>
 			</div>
 			{% endfor %}

@@ -33,6 +33,8 @@ class Address(models.Model):
     zip_code = models.CharField(max_length=20)
     location = models.ForeignKey(
         Location, on_delete=models.CASCADE, null=True, blank=True)
+    lat = models.DecimalField(max_digits = 15, decimal_places=8, null=True, blank=True)
+    lon = models.DecimalField(max_digits = 15, decimal_places=8, null=True, blank=True)
 
     def __str__(self):
         return self.name
