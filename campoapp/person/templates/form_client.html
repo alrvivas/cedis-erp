@@ -113,11 +113,6 @@
 					<input type="text" class="form-control" name="address_set-0-zip_code" maxlength="50" placeholder="59000" pattern="[0-9]{5}" id="id_zip_code">
 			    </div>
 			    <div class="form-group col ui-widget">
-			    	<label for="id_location_name">Estado:</label>
-			    	<input type="text" class="form-control" name="estado_name" maxlength="50" id="id_estado_name">
-			    	<input type="hidden" class="form-control" name="estado_id" maxlength="50" id="id_estado" value="">
-			    </div>
-			    <div class="form-group col ui-widget">
 			    	<label for="id_location_name">Localidad:</label>
 			    	<input type="text" class="form-control" name="location_name" maxlength="50" id="id_location_name">
 			    	<input type="hidden" class="form-control" name="address_set-0-location" maxlength="50" id="id_location" value="">
@@ -184,10 +179,9 @@
 	});	
 </script>
 <script type="text/javascript">
-$(document).ready(function() {	
+$(document).ready(function() {
 	$("#id_location_name").autocomplete({
 		minLength: 2,
-		url:
         source:'{% url "address:autocomplate_location" %}',        
         focus: function( event, ui ) {
         	$("#id_location_name").val(ui.item.label);
