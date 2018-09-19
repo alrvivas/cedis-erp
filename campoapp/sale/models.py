@@ -51,7 +51,7 @@ class Order(AbstractModel):
         return self.client.name
 
 class Deposit_Balance(AbstractModel):
-    order = models.ForeignKey(Employee,on_delete=models.CASCADE, null=True, blank=True)
+    order = models.ForeignKey(Order,on_delete=models.CASCADE, null=True, blank=True)
     deposit = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
 
     def __str__(self): 

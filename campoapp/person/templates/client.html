@@ -18,40 +18,57 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
   </form>
 </nav>
-
-<div class="row">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Nota</th>
-                    <th scope="col">Adeudo</th>
-                    <th scope="col">Abono</th>
-                    <th scope="col">Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if results %}
-                    {% for orders in results  %}
+<ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#order-client" role="tab" aria-controls="pills-home" aria-selected="true">Ordenes</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Perfil</a>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="order-client" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <th scope="row"><a href=""></a></th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <th scope="col">Nota</th>
+                            <th scope="col">Vendedor</th>
+                            <th scope="col">Adeudo</th>
+                            <th scope="col">Abono</th>
+                            <th scope="col">Fecha</th>
                         </tr>
-                    {% endfor %}
-                {% else %}
-                    {% for orders in orders  %}
-                        <tr>
-                            <th scope="row"><a href="">{{ clients.name }}</a></th>
-                            <td>{{ clients.cel }} </td>
-                            <td>{{ clients.price_list }} </td>
-                            <td>{{ clients.employee }} </td>
-                        </tr>
-                    {% endfor %}
-                {% endif %}
-            </tbody>                
-        </table>
+                    </thead>
+                    <tbody>
+                        {% if results %}
+                            {% for orders in results  %}
+                                <tr>
+                                    <th scope="row"><a href=""></a></th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            {% for orders in orders  %}
+                                <tr>
+                                    <th scope="row"><a href="">{{ orders.id }}</a></th>
+                                    <td>{{ orders.employee }}</td>
+                                    <td>{{ orders.balance }}</td>
+                                    <td>{{ orders.deposit_balance_set. }}</td>
+                                    <td>{{ orders.createdAt }} </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>                
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        {{client.tel_1}}
     </div>
 </div>
+
 {% endblock %}
