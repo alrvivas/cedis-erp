@@ -9,8 +9,19 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import FormView
 from django.db.models import Q
-from .models import Location
+from .models import Location, State
 import json
+
+class AutocomplateStateView(FormView):
+
+	def get(self,request,*args,**kwargs):
+	    q = self.request.GET.get('term','')
+	    ret = []
+	    listado = State.objects.filter(name__istartswith=q).order_by("name")
+	    for l in listado:
+	        ret.append({'label':l.name, 'value':l.id})
+	        
+	    return HttpResponse(json.dumps(ret), content_type='application/json')
 
 class AutocomplateView(FormView):
 

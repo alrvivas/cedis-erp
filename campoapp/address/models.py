@@ -30,7 +30,7 @@ class Address(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     name = models.CharField(max_length=140)
     street = models.CharField(max_length=140)
-    zip_code = models.CharField(max_length=20)
+    zip_code = models.CharField(max_length=20,null=True, blank=True)
     location = models.ForeignKey(
         Location, on_delete=models.CASCADE, null=True, blank=True)
     lat = models.DecimalField(max_digits = 15, decimal_places=8, null=True, blank=True)
