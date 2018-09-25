@@ -11,7 +11,13 @@
     </head>
     <body >
         {% include "menu.html" %}
-        <div class="container-fluid">            
+        <div class="container-fluid">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">     
+                    {% block breadcrumbs %}<li class="breadcrumb-item active" aria-current="page"><a href="{% url 'index' %}">Home</a></li>{% endblock %} 
+                </ol>
+            </nav>
+
             {% block contedor %}{% endblock %} 
         </div>
               

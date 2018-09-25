@@ -1,4 +1,7 @@
-{% extends "base.html" %} 
+{% extends "routes.html" %} 
+{% block breadcrumbs %}
+    {{ block.super }} <li class="breadcrumb-item active" aria-current="page"><a href="{{ route.get_absolute_url}}">{{route.name}}</a></li>
+{% endblock %} 
 {% block contedor %}
 <header>
     <div class="jumbotron jumbotron-fluid">
@@ -6,7 +9,7 @@
         {% if query %}
           <h1 >Resultados para: {{ query|escape }}</h1>
         {% else %}
-          <h1 class="display-4">Ruta: / {{route.name}}</h1>
+          <h1 class="display-4">Ruta: {{route.name}}</h1>
          {% endif %} 
       </div>
     </div>

@@ -5,7 +5,7 @@ html, body{
 .container-fluid{
 }
 .container-fluid .row {
-	min-height: 100% !important;
+	/*min-height: 100% !important;*/
 }
 .row a,h3 {
 	text-decoration: none !important;
@@ -13,20 +13,22 @@ html, body{
 	text-decoration: none !important;
 }
 .row .cedis {
+  display: table;
   background: tomato;
   color: #ffffff;  
+  width: 100%;
   min-height: 280px;
   text-transform: uppercase;
 }
 .row .cedis h3 {
+  display: table-cell;
 	text-align: center;
-	line-height: 280px;
+	vertical-align: middle;
 	text-decoration: none !important;
 }
 .row .routes {
   background: tomato;
-  color: #ffffff;
-  
+  color: #ffffff;  
   min-height: 280px;
   text-transform: uppercase;
 }
@@ -38,6 +40,15 @@ html, body{
     font-size: 128px;
     line-height: 0;
     vertical-align: middle;
+}
+.list-items{
+  padding: .75rem 1.25rem;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+}
+.list-items i.material-icons {
+    vertical-align: text-bottom;
 }
 .ui-helper-hidden-accessible {
   border: 0;

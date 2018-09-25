@@ -1,4 +1,7 @@
 {% extends "base.html" %} 
+{% block breadcrumbs %}
+    {{ block.super }}<li class="breadcrumb-item active" aria-current="page"><a href="{% url 'cedis:cedis' %}">CEDIS</a></li>
+{% endblock %}
 {% block contedor %}
 <header>
     <div class="jumbotron jumbotron-fluid">

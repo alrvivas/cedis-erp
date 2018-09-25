@@ -64,6 +64,7 @@ class RouteCedis(DetailView):
 
     def get(self, request, slug):
         self.cedis = get_object_or_404(Cedis, slug=self.kwargs['slug'])
+        cedis = self.cedis
         routes = Route.objects.filter(cedis=self.cedis)
         query = self.request.GET.get('q', '')
         if query:
@@ -119,6 +120,7 @@ class ClientRoute(DetailView):
     def get(self, request, slug):
         self.route = get_object_or_404(Route, slug=self.kwargs['slug'])
         route = self.route
+        cedis = route.cedis
         clients = Client.objects.filter(route=self.route)
         query = self.request.GET.get('q', '')
         if query:

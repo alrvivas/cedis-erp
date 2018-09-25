@@ -60,7 +60,10 @@ class PersonView(DetailView):
     def get(self, request, slug):
         self.client = get_object_or_404(Client, slug=self.kwargs['slug'])
         client = self.client
+        route = client.route
+        cedis = route.cedis
         orders = Order.objects.filter(client=self.client)
+        address = Address.objects.filter(client=self.client)
         query = self.request.GET.get('q', '')
         if query:
             qset = (
@@ -85,6 +88,7 @@ class ClientCreation(View):
         page_title = 'Agregar cliente'
         self.route = get_object_or_404(Route, slug=self.kwargs['slug'])
         route = self.route
+        cedis = route.cedis
         employee = Employee.objects.filter(cedis=route.cedis)
         price_list = PriceList.objects.filter(cedis=route.cedis)
         form = self.form_class(initial=self.initial)
