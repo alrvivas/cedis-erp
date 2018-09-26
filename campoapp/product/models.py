@@ -55,7 +55,7 @@ class Product(AbstractModel):
     weight = models.DecimalField(max_digits=6, decimal_places=3,)
     unit = models.CharField(max_length=2, choices=UNIDAD)
     imagen = models.ImageField("Imagen Producto", upload_to="images/productos",
-                               blank=True, null=True, default='images/default-01.png')
+                               blank=True, null=True, default='images/productos/default-01.png')
 
     def __str__(self):
         return self.name
