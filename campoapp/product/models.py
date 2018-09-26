@@ -1,4 +1,5 @@
 import uuid
+from django.urls import reverse
 from django.db import models
 
 
@@ -29,6 +30,9 @@ class Category(AbstractModel):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('product:category_detail', args=[str(self.slug)])
+
     #@models.permalink
     # def get_absolute_url(self):
     #	return ('catalogo_categoria', (), { 'categoria_slug': self.slug })
@@ -55,6 +59,9 @@ class Product(AbstractModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('product:product_detail', args=[str(self.slug)])
 
 
 class MixedProduct(AbstractModel):

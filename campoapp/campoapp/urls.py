@@ -29,6 +29,7 @@ urlpatterns = [
     path('address/', include('address.urls')),
     path('cedis/', include('cedis.urls')),
     path('person/', include('person.urls')),
+    path('categorys/', include('product.urls')),
     path('liquidacion/', include('sale.urls')),
     path('ca/admin/', admin.site.urls),
     re_path(r'^login/$', views.LoginView, name='login'),

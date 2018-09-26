@@ -1,0 +1,51 @@
+{% extends "base.html" %} 
+{% block breadcrumbs %}
+    {{ block.super }}<li class="breadcrumb-item active" aria-current="page"><a href="{% url 'product:categorys' %}">Categorías</a></li>
+{% endblock %}
+{% block contedor %}
+<header>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        {% if query %}
+          <h1 >Resultados para: {{ query|escape }}</h1>
+        {% else %}
+          <h1 class="display-4">{{ page_title }}</h1>
+         {% endif %} 
+      </div>
+    </div>
+</header>
+<nav class="navbar navbar-light bg-light">
+  <a href="#">Agregar categoría</a>
+  <form class="form-inline">
+    <div class="input-group mb-3">
+      <input type="search" class="form-control" placeholder="Categoría" aria-label="Categoría"  name ="q" value="{{ query|escape }}" aria-describedby="button-addon2">
+      <div class="input-group-append">        
+        <button class="input-group-text btn-outline-primary my-2 my-sm-0" type="submit" id="button-addon2"><i class="material-icons">search</i></button>        
+      </div>
+    </div>     
+  </form>
+</nav>
+<div class="row">
+    {% if results %}
+      {% for category in results %}
+      <div class="col-3">
+          <a href="{{ category.get_absolute_url}} "><div class="cedis">
+              <h3>
+                  {{ category.name }} 
+              </h3>   
+          </div></a>               
+      </div>
+      {% endfor %}
+    {% else %}
+      {% for category in category %}
+      <div class="col-3">
+          <a href="{{ category.get_absolute_url}} "><div class="cedis">
+              <h3>
+                  {{ category.name }} 
+              </h3>   
+          </div></a>               
+      </div>
+      {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

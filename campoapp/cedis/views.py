@@ -72,7 +72,7 @@ class RouteCedis(DetailView):
                 Q(name__icontains=query)
             )
             results = Route.objects.filter(qset, cedis=self.cedis)
-            template_name = "cedis.html"
+            template_name = "routes.html"
             return render(request, self.template_name, locals())
         else:
             results = []

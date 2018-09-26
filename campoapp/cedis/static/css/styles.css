@@ -74,8 +74,9 @@ ul.bs-autocomplete-menu {
   background-color: #fff;
   box-shadow: 0px 1px 6px 1px rgba(0, 0, 0, 0.4);
 }
-
-
+th {
+    cursor: pointer;
+}
 
 /* Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) { ... }
