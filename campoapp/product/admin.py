@@ -41,7 +41,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(ImportExportModelAdmin):
-    list_display = ('name','category','standard_price','weight','unit') 
+    list_display = ('name','slug','category','standard_price','weight','unit') 
     list_editable = ('category','standard_price')   
     search_fields = ['name',]
     resource_class = ProductResource

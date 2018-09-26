@@ -14,13 +14,13 @@ from .models import Product, Category
 from person.models import Client
 
 class CategoryView(View):
-    model = Category
-    page_title = 'Categorías'
+    model = Category    
     template_name = 'categorys.html'
 
     @method_decorator(login_required(login_url='/login/'))
     def get(self, request):
         category = Category.objects.all()
+        page_title = 'Categorías'
         query = self.request.GET.get('q', '')
         if query:
             qset = (
