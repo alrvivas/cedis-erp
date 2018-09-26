@@ -1,0 +1,66 @@
+{% extends "products.html" %} 
+{% block breadcrumbs %}
+    {{ block.super }} <li class="breadcrumb-item active" aria-current="page"><a href="{{ product.get_absolute_url}}">{{product.name|truncatechars:10}}</a></li>
+{% endblock %} 
+{% block contedor %}
+<header>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">        
+            <h1 class="display-4">{{product.name}}</h1>         
+        </div>
+    </div>
+</header>
+<ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-details-tab" data-toggle="pill" href="#pills-details" role="tab" aria-controls="pills-details" aria-selected="false">Detalles</a>
+    </li>        
+</ul>
+<div class="tab-content" id="pills-tabContent">    
+    <div class="tab-pane fade show active" id="pills-details" role="tabpanel" aria-labelledby="pills-details-tab">
+        <!--<ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url "person:update_client" slug=slug %}"><i class="material-icons" data-toggle="tooltip" data-placement="top" title="Editar">edit</i></a>
+            </li>
+        </ul>-->
+        <div class="row">
+            <div class="col">                
+                <div class="row">
+                    <div class="col list-items">
+                        <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Categoría">category</i> {{product.category}}
+                    </div>  
+                    <div class="col list-items">
+                        <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Codigo de barras">vertical_split</i> {{product.barcode}}
+                    </div>
+                </div>               
+                <div class="row">
+                    <div class="col list-items">
+                        <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Precio Estandar">attach_money</i> {{product.standard_price}}
+                    </div>
+                    <div class="col list-items">
+                        <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Peso">local_drink</i> {{product.weight}} Kg  
+                    </div>
+                    <div class="col list-items">
+                        <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Unidad">local_cafe</i> {{product.get_unit_display}}
+                    </div>
+                </div>                
+            </div>
+            <div class="col-4">
+                <div class="text-center">
+                    <figure class="figure">
+                        <img src="{{product.imagen.url}}" class="figure-img img-fluid rounded" alt="{{client.name}}" style="max-height: 200px;">
+                        <figcaption class="figure-caption"></figcaption>
+                    </figure>
+                </div>
+            </div>            
+        </div>                    
+    </div>
+</div>
+</div>
+{% endblock %}
+{% block adicional-scripts %}
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }); 
+</script>
+{% endblock %}
