@@ -63,3 +63,6 @@ class Client(models.Model):
 
     def add_client_url(self):
         return reverse('person:new_client', kwargs={'slug': self.slug})
+
+    def update_client_url(self):
+        return reverse('person:update_client', kwargs={'slug': self.slug})

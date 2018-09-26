@@ -9,7 +9,8 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import FormView
 from django.db.models import Q
-from .models import Location
+from .models import Location,Address
+from .forms import addressForm
 import json
 
 class AutocomplateView(FormView):
@@ -22,3 +23,35 @@ class AutocomplateView(FormView):
 	        ret.append({'label':l.name + " / "+ l.municipality.state.short_name, 'value':l.id})
 	        
 	    return HttpResponse(json.dumps(ret), content_type='application/json')
+
+class ClientAddressUpdate(View):
+    model = Address
+    form_class = addressForm
+    initial = {'key': 'value'}
+    template_name = 'form_edit_address.html'
+
+    def get(self, request, id):
+        page_title = 'Editar dirección'
+        self.address = get_object_or_404(Address, id=self.kwargs['id'])
+        address = self.address
+        client = address.client
+        route = client.route
+        cedis = route.cedis
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, locals())
+
+    def post(self, request, id):
+        self.address = get_object_or_404(Address, id=self.kwargs['id'])
+        address = self.address
+        client = address.client
+        route = client.route       
+        form = self.form_class(request.POST,instance=address)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.save()            
+            return redirect(client.get_absolute_url())
+        else:
+            form = self.form_class()         
+        args = {}
+        # args.update(request)
+        return render(request, self.template_name, locals())

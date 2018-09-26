@@ -114,6 +114,38 @@ class ClientCreation(View):
         # args.update(request)
         return render(request, self.template_name, locals())
 
+class ClientUpdate(View):
+    model = Client
+    form_class = clientForm
+    initial = {'key': 'value'}
+    template_name = 'form_edit_client.html'
+
+    def get(self, request, slug):
+        page_title = 'Editar cliente'
+        self.client = get_object_or_404(Client, slug=self.kwargs['slug'])
+        client = self.client
+        route = client.route
+        cedis = route.cedis
+        employee = Employee.objects.filter(cedis=cedis)
+        price_list = PriceList.objects.filter(cedis=cedis)
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, locals())
+
+    def post(self, request, slug):
+        self.client = get_object_or_404(Client, slug=self.kwargs['slug'])
+        client = self.client
+        route = client.route       
+        form = self.form_class(request.POST,instance=client)
+        if form.is_valid():
+            client = form.save(commit=False)
+            client.save()            
+            return redirect(client.get_absolute_url())
+        else:
+            form = self.form_class()       
+        args = {}
+        # args.update(request)
+        return render(request, self.template_name, locals())
+
 class EmployeeCreation(View):
     model = Cedis
     form_class = employeeForm

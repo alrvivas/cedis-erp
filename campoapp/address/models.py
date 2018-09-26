@@ -38,3 +38,7 @@ class Address(models.Model):
 
     def __str__(self):
         return self.name
+
+
+    def update_address_url(self):
+        return reverse('address:update_address', kwargs={'id': self.id})

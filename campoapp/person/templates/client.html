@@ -1,6 +1,6 @@
 {% extends "route_clients.html" %} 
 {% block breadcrumbs %}
-    {{ block.super }} <li class="breadcrumb-item active" aria-current="page">{{client.name|truncatechars:10}}</li>
+    {{ block.super }} <li class="breadcrumb-item active" aria-current="page"><a href="{{ client.get_absolute_url}}">{{client.name|truncatechars:10}}</a></li>
 {% endblock %} 
 {% block contedor %}
 <header>
@@ -73,6 +73,11 @@
         </div>
     </div>
     <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url "person:update_client" slug=slug %}"><i class="material-icons" data-toggle="tooltip" data-placement="top" title="Editar">edit</i></a>
+            </li>
+        </ul>
         <div class="row">
             <div class="col">                
                 <div class="row">
@@ -84,7 +89,7 @@
                     </div>
                 </div>               
                 <div class="row">
-                    <div class="col list-items" ><i class="material-icons" data-placement="top" title="R.F.C.">business</i> {{client.rfc}}</div>
+                    <div class="col list-items" ><i class="material-icons" data-toggle="tooltip" data-placement="top" title="R.F.C.">business</i> {{client.rfc}}</div>
                 </div>
                 <div class="row">
                     <div class="col list-items">
@@ -117,21 +122,26 @@
                 </div>
             </div>            
         </div>
-        <div class="row">
+        <div class="row mt-3">
             <div class="col">
-                <div class="jumbotron jumbotron-fluid">
-                {% for address in address %}
-                <h4 class="display-4">Dirección: {{address.name}}</h4>
-                <div class="row">
-                    <div class="col list-items">
-                        <i class="material-icons align-text-bottom">location_on</i>{{address.street}}, {{address.zip_code}}, {{address.location.name}}, {{address.location.municipality.name}}, {{address.location.municipality.state}}
+                <h3>Direcciones</h3>                
+            </div>
+        </div>
+        <div class="row">                            
+            {% for address in address %}
+                <div class="col">
+                    <div class="card bg-light mb-3 mt-3" style="max-width: 18rem;">
+                      <div class="card-header">{{address.name}} <a class="card-link float-right" href="{% url "address:update_address" id=address.id %}"><i class="material-icons" data-toggle="tooltip" data-placement="top" title="Editar">edit_location</i></a></div>
+                      <div class="card-body">
+                        <h5 class="card-title">Light card title</h5>
+                        <p class="card-text"><i class="material-icons align-text-bottom">location_on</i>{{address.street}}, C.P.: {{address.zip_code}}, {{address.location.name}}, {{address.location.municipality.name}}, {{address.location.municipality.state}}.</p>                        
+                      </div>
                     </div>
                 </div>
-                {% endfor %}
-                </div>         
-            </div>            
-        </div>
+            {% endfor %}                         
+        </div>            
     </div>
+</div>
     <div class="tab-pane fade" id="price_list" role="tabpanel" aria-labelledby="pills-home-tab">
         <div class="row">
             <div class="table-responsive">
@@ -142,8 +152,7 @@
                             <th scope="col">Precio</th>
                         </tr>
                     </thead>
-                    <tbody>                       
-                    
+                    <tbody>                    
                         <tr>
                             <td scope="row"></a></td>
                             <td></td>
