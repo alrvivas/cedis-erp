@@ -34,11 +34,11 @@ urlpatterns = [
     re_path(r'^login/$', views.LoginView, name='login'),
     re_path(r'^logout/$', views.LogoutView, name='logout'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-"""if settings.DEBUG == False:
+if settings.DEBUG == False:
     urlpatterns += [
         path(r'^media/(?P<path>.*)$', 'django.views.static.serve',
              {'document_root': settings.MEDIA_ROOT, }),
-    ]"""
+    ]
 """urlpatterns += [
     url(r'^accounts/', include('django.contrib.auth.urls')),
 ]"""
