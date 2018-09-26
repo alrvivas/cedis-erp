@@ -41,8 +41,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(ImportExportModelAdmin):
-    list_display = ('name','category','weight','unit') 
-    #list_editable = ('category',)   
+    list_display = ('name','category','standard_price','weight','unit') 
+    list_editable = ('category','standard_price')   
     search_fields = ['name',]
     resource_class = ProductResource
     prepopulated_fields = {'slug' : ('name',)}
