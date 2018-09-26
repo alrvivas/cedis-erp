@@ -51,8 +51,8 @@ class Product(AbstractModel):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=True, blank=True)
     standard_price = models.DecimalField(
-        max_digits=30, decimal_places=3, verbose_name=('Precio Estandar'))
-    weight = models.DecimalField(max_digits=30, decimal_places=3,)
+        max_digits=6, decimal_places=3, verbose_name=('Precio Estandar'))
+    weight = models.DecimalField(max_digits=6, decimal_places=3,)
     unit = models.CharField(max_length=2, choices=UNIDAD)
     imagen = models.ImageField("Imagen Producto", upload_to="images/productos",
                                blank=True, null=True, default='images/default-01.png')
