@@ -151,8 +151,8 @@ MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_STORAGE_BUCKET_NAME = 'cedis-erp'
 AWS_S3_REGION_NAME = 'us-west-1'  # e.g. us-east-2
-AWS_ACCESS_KEY_ID = 'AKIAIQ267VPJCBRRAVQA'
-AWS_SECRET_ACCESS_KEY = 'hArHq2eIJ+mIjmCAgcOmsorC8MefhBVcEgaH6aOS'
+AWS_ACCESS_KEY_ID = 'key'
+AWS_SECRET_ACCESS_KEY = 'key'
 
 # Tell django-storages the domain to use to refer to static files.
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
