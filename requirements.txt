@@ -25,7 +25,7 @@ pyasn1==0.4.4
 python-dateutil==2.7.3
 pytz==2018.5
 PyYAML==3.13
-rsa==3.4.2
+rsa==4.7
 s3transfer==0.1.13
 semantic-version==2.5.0
 simplejson==3.16.0
